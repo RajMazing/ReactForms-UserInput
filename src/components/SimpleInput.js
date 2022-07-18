@@ -65,7 +65,7 @@ const SimpleInput = (props) => {
 		<div className={emailInputClasses}>
 			<label htmlFor="email">Your Email</label>
 			<input
-				type="text"
+				type="email"
 				id="email"
 				onChange={emailInputChangeHandler}
 				onBlur={emailInputBlurHandler}
@@ -107,7 +107,7 @@ const SimpleInput = (props) => {
 			<div className={emailInputClasses}>
 				<label htmlFor="email">Your Email</label>
 				<input
-					type="text"
+					type="email"
 					id="email"
 					onChange={emailInputChangeHandler}
 					onBlur={emailInputBlurHandler}

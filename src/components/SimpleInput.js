@@ -8,8 +8,8 @@ const SimpleInput = (props) => {
 
 	const enteredNameIsValid = enteredName.trim() !== "";
 	const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
-	const enteredEmailIsValid = enteredEmail.trim() !== "";
-	const emailInputIsInvalid = !enteredEmailIsValid && enteredEmailTouched;
+	const enteredEmailIsValid = enteredEmail.includes('@');
+	const enteredEmailIsInvalid = !enteredEmailIsValid && enteredEmailTouched;
 
 	let formIsValid = false;
 
@@ -45,45 +45,20 @@ const SimpleInput = (props) => {
 		console.log(enteredName);
 		console.log(enteredEmail);
 
-		<div className={nameInputClasses}>
-			<label htmlFor="name">Your Name</label>
-			<input
-				type="text"
-				id="name"
-				onChange={nameInputChangeHandler}
-				onBlur={nameInputBlurHandler}
-				value={enteredName}
-			/>
-			{nameInputIsInvalid && (
-				<p className="error-text">Name must not be empty!</p>
-			)}
-		</div>;
 		// nameInputRef.current.value = ''; NOT IDEAL, DONT MANIPULATE THE DOM
 		setEnteredName("");
 		setEnteredNameTouched(false);
 
-		<div className={emailInputClasses}>
-			<label htmlFor="email">Your Email</label>
-			<input
-				type="email"
-				id="email"
-				onChange={emailInputChangeHandler}
-				onBlur={emailInputBlurHandler}
-				value={enteredEmail}
-			/>
-			{emailInputIsInvalid && (
-				<p className="error-text">Email must not be empty!</p>
-			)}
-		</div>;
+		
 		setEnteredEmail("");
 		setEnteredEmailTouched(false);
 	};
 
-	const nameInputClasses = enteredNameIsValid
+	const nameInputClasses = nameInputIsInvalid
 		? "form-control invalid"
 		: "form-control";
 
-	const emailInputClasses = enteredEmailIsValid
+	const emailInputClasses = enteredEmailIsInvalid
 		? "form-control invalid"
 		: "form-control";
 
@@ -113,7 +88,7 @@ const SimpleInput = (props) => {
 					onBlur={emailInputBlurHandler}
 					value={enteredEmail}
 				/>
-				{emailInputIsInvalid && (
+				{enteredEmailIsInvalid && (
 					<p className="error-text">Email must not be empty!</p>
 				)}
 			</div>
@@ -125,3 +100,4 @@ const SimpleInput = (props) => {
 };
 
 export default SimpleInput;
+enteredEmailIsInvalid

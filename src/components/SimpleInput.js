@@ -32,6 +32,7 @@ const SimpleInput = (props) => {
 
 		// nameInputRef.current.value = ''; NOT IDEAL, DONT MANIPULATE THE DOM
 	setEnteredName('');
+	setEnteredNameTouched(false);
 	};
 
 	

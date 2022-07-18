@@ -3,20 +3,26 @@ import { useEffect, useState } from "react";
 const SimpleInput = (props) => {
 	const [enteredName, setEnteredName] = useState("");
 	const [enteredNameTouched, setEnteredNameTouched] = useState(false);
+	const [formIsValid, setFormIsValid] = useState(false);
 
 	const enteredNameIsValid = enteredName.trim() !== "";
 	const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
+
+	useEffect(() => {
+		if (enteredNameIsValid) {
+			setFormIsValid(true);
+		} else {
+			setFormIsValid(false);
+		}
+	}, [enteredNameIsValid]);
 
 	//evaluates every KEY STROKE
 	const nameInputChangeHandler = (event) => {
 		setEnteredName(event.target.value);
 	};
 
-
 	const nameInputBlurHandler = (events) => {
 		setEnteredNameTouched(true);
-
-		
 	};
 
 	const formSubmissionHandler = (event) => {
@@ -24,18 +30,15 @@ const SimpleInput = (props) => {
 
 		setEnteredNameTouched(true);
 
-
 		if (!enteredNameIsValid) {
 			return;
 		}
-	console.log(enteredName);
+		console.log(enteredName);
 
 		// nameInputRef.current.value = ''; NOT IDEAL, DONT MANIPULATE THE DOM
-	setEnteredName('');
-	setEnteredNameTouched(false);
+		setEnteredName("");
+		setEnteredNameTouched(false);
 	};
-
-	
 
 	const nameInputClasses = enteredNameIsValid
 		? "form-control invalid"
@@ -57,7 +60,7 @@ const SimpleInput = (props) => {
 				)}
 			</div>
 			<div className="form-actions">
-				<button>Submit</button>
+				<button disabled={!formIsValid}>Submit</button>
 			</div>
 		</form>
 	);
